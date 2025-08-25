@@ -13,8 +13,9 @@ password:{
     type:String,
     requried:true
 },
-
-
+usertype:{
+_id: { type: mongoose.Schema.Types.ObjectId,  ref: "UserType" }
+} 
 },
 { timestamps: true }
 )
