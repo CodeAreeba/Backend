@@ -33,7 +33,7 @@ const createuser = async (req, res) => {
       const typeexist = await UserType.findOne({_id:typeid});
     if (!typeexist) {
       return res.json({
-        error: " UserTYpe not exist",
+        error: " UserType not exist",
       });
     }
     const usercreated = await User.create({
@@ -42,6 +42,7 @@ const createuser = async (req, res) => {
       password,
       usertype:{_id:typeid}
     });
+       
 
     return res.json({
       status: 200,
@@ -52,7 +53,7 @@ const createuser = async (req, res) => {
   //   const { name, father, email, phone, password, username } = req.body;
 };
 const createusertype = async (req, res) => {
-  const { name} = req.body;
+  const {name} = req.body;
   if (!name) {
     return res.json({
       error: "Name is required",
@@ -97,11 +98,13 @@ const getuserlist = async (req, res) => {
 };
 const getsingleuser = async (req, res) => {
   const { id } = req.params;
-  const user = await User.find({ _id: id });
+  const user = await User.findById(id);
+ 
   return res.json({
     status: 200,
     message: "User fetched Successfully",
     data: user,
+    token: await user.generateToken()
   });
 };
 
