@@ -3,7 +3,7 @@ const { createuser, getuserlist, getsingleuser, updateuser,createusertype } = re
 const authMiddleware = require("../Middlewares/authMiddleware");
 const router = express.Router();
 
-router.post('/create',authMiddleware,createuser);
+router.post('/create',createuser);
 router.get('/createtype',createusertype);
 router.get('/list',getuserlist);
 router.get('/user/:id',getsingleuser);

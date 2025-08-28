@@ -1,5 +1,6 @@
 const User = require("../Models/userModel");
 const UserType = require("../Models/userTypeModel");
+const { sendRegisterEmailToUser } = require("./emailController");
 
 const createuser = async (req, res) => {
   const { name, email, password,typeid } = req.body;
@@ -43,11 +44,13 @@ const createuser = async (req, res) => {
       usertype:{_id:typeid}
     });
        
+sendRegisterEmailToUser({clientemail: email,name },res)
 
     return res.json({
       status: 200,
       message: "User Created",
       data: usercreated,
+      email:res
     });
   } catch (error) {}
   //   const { name, father, email, phone, password, username } = req.body;
